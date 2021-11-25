@@ -23,6 +23,13 @@ locals {
   acr_georeplication_locations = length(var.acr_georeplication_locations) < 1 ? [] : var.acr_georeplication_locations
 }
 
+resource "azurerm_storage_account" "a" {
+  name = "dasd2ed3d32e3"
+  resource_group_name = data.azurerm_resource_group.main.name
+  location            = var.location
+  tags                = var.tags
+}
+
 resource "azurerm_container_registry" "main" {
   count = var.enable_acr ? 1 : 0
 
