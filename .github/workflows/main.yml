@@ -34,7 +34,7 @@ jobs:
     # Inbuilt linting
     - name: Terraform Format
       run: terraform fmt -check -diff
-      continue-on-failure: true
+      continue-on-error: true
     - name: Terraform Validate
       run: terraform validate
 
