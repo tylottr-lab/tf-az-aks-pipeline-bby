@@ -22,7 +22,7 @@ jobs:
       - name: setup terraform
         uses: hashicorp/setup-terraform@v1.2.1
         with:
-          terraform_version: ${{ TERRAFORM_VERSION }}
+          terraform_version: ${TERRAFORM_VERSION}
           
       # init
       - name: terraform init
@@ -46,7 +46,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
           filter_mode: nofilter
-          
+
       - name: tfsec
         uses: reviewdog/action-tfsec@v1.11.0
         id: tfsec
