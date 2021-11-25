@@ -41,9 +41,11 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
+          filter_mode: nofilter
       - name: tfsec
         uses: reviewdog/action-tfsec@v1.11.0
         id: tfsec
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
+          filter_mode: nofilter
