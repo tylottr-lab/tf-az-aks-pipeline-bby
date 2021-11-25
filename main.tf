@@ -26,7 +26,7 @@ locals {
 resource "azurerm_storage_account" "a" {
   name = "dasd2ed3d32e3"
   resource_group_name = data.azurerm_resource_group.main.name
-  location            = var.location
+  location            = "${var.location}"
   tags                = var.tags
   account_tier             = "Standard"
   account_replication_type = "GRS"
