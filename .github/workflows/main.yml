@@ -39,6 +39,5 @@ jobs:
         uses: reviewdog/action-tflint@v1.13.0
         id: tflint
       - name: tfsec
-        uses: triat/terraform-security-scan@v3.0.0
+        uses: reviewdog/action-tfsec@v1.11.0
         id: tfsec
-  
