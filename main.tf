@@ -28,6 +28,8 @@ resource "azurerm_storage_account" "a" {
   resource_group_name = data.azurerm_resource_group.main.name
   location            = var.location
   tags                = var.tags
+  account_tier             = "Standard"
+  account_replication_type = "GRS"
 }
 
 resource "azurerm_container_registry" "main" {
