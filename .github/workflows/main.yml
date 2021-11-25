@@ -45,6 +45,7 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         reporter: github-pr-review
         filter_mode: added
+      if: ${{ github.event_name == 'pull_request' }}
     - name: tfsec
       uses: reviewdog/action-tfsec@v1.11.0
       id: tfsec
@@ -52,3 +53,4 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         reporter: github-pr-review
         filter_mode: added
+      if: ${{ github.event_name == 'pull_request' }}
