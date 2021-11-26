@@ -43,30 +43,14 @@ jobs:
       continue-on-error: true
     - name: Echo Terraform Format output
       run: echo ${{ steps.fmt.outputs.stdout }}
-    # - name: Upload Terraform Format check
-    #   uses: LouisBrunner/checks-action@v1.1.1
-    #   with:
-    #     token: ${{ secrets.GITHUB_TOKEN }}
-    #     name: fmt
-    #     conclusion: ${{ steps.fmt.outcome }}
-    #     output: |
-    #       {
-    #         "summary": "terraform fmt outcome",
-    #         "description": "List of files that would have been changed if terraform fmt wants to make changes.",
-    #         "text": "${{ steps.fmt.outputs.stdout }}"
-    #       }
-    - uses: LouisBrunner/checks-action@v1.1.1
-      if: always()
+    - name: Upload Terraform Format check
+      uses: LouisBrunner/checks-action@v1.1.1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        name: Test XYZ
-        conclusion: ${{ job.status }}
+        name: fmt
+        conclusion: ${{ steps.fmt.outcome }}
         output: |
-          {
-            "summary": "test",
-            "description": "Some test check",
-            "text": "bla bla bla"
-          }
+          { "summary": "${{ steps.fmt.outputs.stdout }}" }
     - name: Terraform Validate
       run: terraform validate
 
