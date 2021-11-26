@@ -76,6 +76,7 @@ jobs:
     - name: Run infracost
       uses: infracost/infracost-gh-action@v0.8.4 
       env:
+        INFRACOST_TERRAFORM_BINARY: terraform_1.0
         INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
       with:
