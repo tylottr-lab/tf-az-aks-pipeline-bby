@@ -62,7 +62,9 @@ jobs:
         name: Test XYZ
         conclusion: ${{ job.status }}
         output: |
-          {"summary": "test"}
+          {
+            "summary": "test"
+          }
     - name: Terraform Validate
       run: terraform validate
 
