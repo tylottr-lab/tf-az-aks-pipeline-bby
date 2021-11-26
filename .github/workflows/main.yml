@@ -39,7 +39,7 @@ jobs:
     # Inbuilt linting
     - name: Terraform Format
       id: fmt
-      run: terraform fmt -check
+      run: terraform fmt -check -no-color
       continue-on-error: true
     - name: Upload Terraform Format check
       uses: LouisBrunner/checks-action@v1.1.1
@@ -50,7 +50,7 @@ jobs:
         output: |
           { "summary": ${{ toJson(steps.fmt.outputs.stdout) }} }
     - name: Terraform Validate
-      run: terraform validate
+      run: terraform validate -no-color
       id: validate
     - name: Upload Terraform Validate check
       uses: LouisBrunner/checks-action@v1.1.1
