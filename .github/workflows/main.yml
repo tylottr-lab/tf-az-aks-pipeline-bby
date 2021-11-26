@@ -54,15 +54,14 @@ jobs:
     #     filter_mode: added
     #   if: ${{ github.event_name == 'pull_request' }}
     
-    - name: tflint
+    - name: Run tflint
       uses: reviewdog/action-tflint@v1.13.0
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         reporter: github-check
         filter_mode: nofilter
-    - name: tfsec
+    - name: Run tfsec
       uses: reviewdog/action-tfsec@v1.11.0
-      id: tfsec
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         reporter: github-check
