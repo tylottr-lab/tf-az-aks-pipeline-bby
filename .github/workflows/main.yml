@@ -41,8 +41,6 @@ jobs:
       id: fmt
       run: terraform fmt -check
       continue-on-error: true
-    - name: Echo Terraform Format output
-      run: echo ${{ steps.fmt.outputs.stdout }}
     - name: Upload Terraform Format check
       uses: LouisBrunner/checks-action@v1.1.1
       with:
@@ -50,7 +48,7 @@ jobs:
         name: fmt
         conclusion: ${{ steps.fmt.outcome }}
         output: |
-          { "summary": "${{ steps.fmt.outputs.stdout }}" }
+          ${{ toJson ( '{ "summary": "steps.fmt.outputs.stdout" }' ) }}
     - name: Terraform Validate
       run: terraform validate
 
