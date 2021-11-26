@@ -40,10 +40,10 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         name: fmt
-        conclusion: ${{ steps.test.outcome }}
+        conclusion: ${{ steps.fmt.outcome }}
         output: |
           {
-            "summary": ${{ steps.test.outputs }}
+            "summary": ${{ steps.fmt.outputs }}
           }
     - name: Terraform Validate
       id: validate
