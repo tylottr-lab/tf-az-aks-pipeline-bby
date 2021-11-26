@@ -23,11 +23,11 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    
+
     # Set up and initialise
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
@@ -59,7 +59,7 @@ jobs:
     #     reporter: github-pr-review
     #     filter_mode: added
     #   if: ${{ github.event_name == 'pull_request' }}
-    
+
     - name: Run tflint
       uses: reviewdog/action-tflint@v1.13.0
       with:
@@ -72,13 +72,17 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         reporter: github-check
         filter_mode: nofilter
-        
+
     - name: Run infracost
-      uses: infracost/infracost-gh-action@v0.8.4 
+      uses: infracost/infracost-gh-action@v0.8.4
       env:
         INFRACOST_TERRAFORM_BINARY: terraform_1.0
         INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
       with:
         path: examples
         post_condition: '{"update": true, "always": true}'
