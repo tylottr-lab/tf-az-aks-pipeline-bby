@@ -1,4 +1,4 @@
-name: Terraform Test
+name: Terraform Module Test
 
 env:
   TF_IN_AUTOMATION: true
@@ -19,7 +19,6 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    # Checkout
     - name: Checkout
       uses: actions/checkout@v2
     
@@ -33,24 +32,38 @@ jobs:
 
     # Inbuilt linting
     - name: Terraform Format
-      run: terraform fmt -check -diff
+      run: terraform fmt -check
       continue-on-error: true
     - name: Terraform Validate
       run: terraform validate
 
     # Third party linting
+    # - name: tflint
+    #   uses: reviewdog/action-tflint@v1.13.0
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     reporter: github-pr-review
+    #     filter_mode: added
+    #   if: ${{ github.event_name == 'pull_request' }}
+    # - name: tfsec
+    #   uses: reviewdog/action-tfsec@v1.11.0
+    #   id: tfsec
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     reporter: github-pr-review
+    #     filter_mode: added
+    #   if: ${{ github.event_name == 'pull_request' }}
+    
     - name: tflint
       uses: reviewdog/action-tflint@v1.13.0
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        reporter: github-pr-review
-        filter_mode: added
-      if: ${{ github.event_name == 'pull_request' }}
+        reporter: github-check
+        filter_mode: nofilter
     - name: tfsec
       uses: reviewdog/action-tfsec@v1.11.0
       id: tfsec
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        reporter: github-pr-review
-        filter_mode: added
-      if: ${{ github.event_name == 'pull_request' }}
+        reporter: github-check
+        filter_mode: nofilter
