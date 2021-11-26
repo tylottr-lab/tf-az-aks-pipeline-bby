@@ -13,6 +13,9 @@ on:
   # Enable workflow to be run manually
   workflow_dispatch:
 
+permissions:
+  checks: write
+
 jobs:
   test:
     name: Test
@@ -37,16 +40,6 @@ jobs:
       continue-on-error: true
     - name: echo stuff
       run: echo ${{ fromJson(steps.fmt.outputs) }}
-    # - name: Upload fmt check
-    #   uses: LouisBrunner/checks-action@v1.1.1
-    #   with:
-    #     token: ${{ secrets.GITHUB_TOKEN }}
-    #     name: fmt
-    #     conclusion: ${{ steps.fmt.outcome }}
-    #     output: |
-    #       {
-    #         "summary": ${{ fromJson(steps.fmt.outputs) }}
-    #       }
     - name: Terraform Validate
       id: validate
       run: terraform validate
