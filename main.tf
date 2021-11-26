@@ -23,6 +23,15 @@ locals {
   acr_georeplication_locations = length(var.acr_georeplication_locations) < 1 ? [] : var.acr_georeplication_locations
 }
 
+resource "azurerm_storage_account" "a" {
+  name = "dasd2ed3d32e3"
+  resource_group_name = data.azurerm_resource_group.main.name
+  location            = "${var.location}"
+  tags                = var.tags
+  account_tier             = "Standard"
+  account_replication_type = "GRS"
+}
+
 resource "azurerm_container_registry" "main" {
   count = var.enable_acr ? 1 : 0
 
@@ -149,8 +158,6 @@ resource "azurerm_kubernetes_cluster" "main" {
 
   addon_profile {
     oms_agent {
-      // Ignore tfsec rule relating to configuring monitoring.
-      #tfsec:ignore:AZU009
       enabled                    = var.enable_monitoring
       log_analytics_workspace_id = local.log_analytics_workspace_id
     }
