@@ -38,13 +38,9 @@ jobs:
 
     # Inbuilt linting
     - name: Terraform Format
-      id: fmt
       run: terraform fmt -check
       continue-on-error: true
-    - name: echo stuff
-      run: echo ${{ fromJson(steps.fmt.outputs) }}
     - name: Terraform Validate
-      id: validate
       run: terraform validate
 
     # Third party linting
