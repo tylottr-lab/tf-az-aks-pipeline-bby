@@ -48,7 +48,7 @@ jobs:
         conclusion: ${{ steps.fmt.outcome }}
         output: |
           {
-            "summary": "${{ fromJson(steps.fmt.outputs.stdout) }}"
+            "summary": "${{ steps.fmt.outputs.stdout }}"
           }
     - name: Terraform Validate
       run: terraform validate
