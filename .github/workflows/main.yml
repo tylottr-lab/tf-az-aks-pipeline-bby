@@ -52,11 +52,11 @@ jobs:
     - name: Terraform Validate
       run: terraform validate
       id: validate
-    - name: Upload Terraform Format check
+    - name: Upload Terraform Validate check
       uses: LouisBrunner/checks-action@v1.1.1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        name: fmt
+        name: validate
         conclusion: ${{ steps.validate.outcome }}
         output: |
           { "summary": ${{ toJson(steps.validate.outputs.stdout) }} }
