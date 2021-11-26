@@ -32,9 +32,21 @@ jobs:
 
     # Inbuilt linting
     - name: Terraform Format
+      id: fmt
       run: terraform fmt -check
       continue-on-error: true
+    - name: Upload fmt check
+      uses: LouisBrunner/checks-action@v1.1.1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        name: fmt
+        conclusion: ${{ steps.test.outcome }}
+        output: |
+          {
+            "summary": ${{ steps.test.outputs }}
+          }
     - name: Terraform Validate
+      id: validate
       run: terraform validate
 
     # Third party linting
