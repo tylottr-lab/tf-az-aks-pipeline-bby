@@ -38,8 +38,11 @@ jobs:
 
     # Inbuilt linting
     - name: Terraform Format
+      id: fmt
       run: terraform fmt -check
       continue-on-error: true
+    - name: Echo fmt
+      run: echo '${{ steps.fmt.outputs.stdout }}'
     - name: Terraform Validate
       run: terraform validate
 
