@@ -40,7 +40,11 @@ jobs:
       # code analysis
       - name: tflint
         uses: reviewdog/action-tflint@v1.13.0
+        with:
+          github_token: ${{ secrets.github_token }}
         if: github.event_name == 'pull_request'
       - name: tfsec
         uses: reviewdog/action-tfsec@v1.11.0
+        with:
+          github_token: ${{ secrets.github_token }}
         if: github.event_name == 'pull_request'
