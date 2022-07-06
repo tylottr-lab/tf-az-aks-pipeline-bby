@@ -149,8 +149,6 @@ resource "azurerm_kubernetes_cluster" "main" {
 
   addon_profile {
     oms_agent {
-      // Ignore tfsec rule relating to configuring monitoring.
-      #tfsec:ignore:AZU009
       enabled                    = var.enable_monitoring
       log_analytics_workspace_id = local.log_analytics_workspace_id
     }
