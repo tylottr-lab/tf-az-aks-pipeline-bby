@@ -1,5 +1,8 @@
 name: Terraform Module Test
 
+permissions:
+  contents: read
+
 # workflow triggers
 on:
   push:
