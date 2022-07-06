@@ -2,6 +2,8 @@ name: Terraform Module Test
 
 permissions:
   contents: read
+  checks: write
+  pull-requests: write
 
 # workflow triggers
 on:
@@ -40,7 +42,15 @@ jobs:
       # code analysis
       - name: tflint
         uses: reviewdog/action-tflint@v1.13.0
-        if: github.event_name != 'pull_request'
+        with:
+          github_token: ${{ secrets.github_token }}
+          filter_mode: nofilter
+          reporter: github-pr-review
+        if: github.event_name == 'pull_request'
       - name: tfsec
         uses: reviewdog/action-tfsec@v1.11.0
-        if: github.event_name != 'pull_request'
+        with:
+          github_token: ${{ secrets.github_token }}
+          filter_mode: nofilter
+          reporter: github-pr-review
+        if: github.event_name == 'pull_request'
