@@ -2,6 +2,7 @@ name: Terraform Module Test
 
 permissions:
   contents: read
+  checks: write
 
 # workflow triggers
 on:
