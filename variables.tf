@@ -20,7 +20,7 @@ variable "resource_prefix" {
 variable "tags" {
   description = "Tags given to the resources created by this template."
   type        = map(string)
-  default     = {}
+  default     = null
 }
 
 #############
